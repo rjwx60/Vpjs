@@ -13,25 +13,6 @@ const portfinder = require('portfinder')
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
-
-/**
- * eleme
-*/
-var express = require('express');
-var app = express()
-
-var appData = require('./../mock/data.json');
-var seller = appData.seller;
-var goods = appData.goods;
-var ratings = appData.ratings;
-
-var apiRoutes = express.Router();
-
-app.use('/api', apiRoutes);
-/**
- * eleme
-*/
-
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
@@ -61,32 +42,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
-    },
-    // eleme
-    // eleme
-    before(app) {
-      app.get('/api/seller', (req, res) => {
-        res.json({
-          errno: 0,
-          data: seller
-        })
-      }),
-      app.get('/api/goods', (req, res) => {
-        res.json({
-          errno: 0,
-          data: goods
-        })
-      }),
-      app.get('/api/ratings', (req, res) => {
-        res.json({
-          errno: 0,
-          data: ratings
-        })
-      })
     }
   },
-  // eleme
-  // eleme
   plugins: [
     new webpack.DefinePlugin({
       'process.env': require('../config/dev.env')
@@ -110,8 +67,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     ])
   ]
 })
-
-
 
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port

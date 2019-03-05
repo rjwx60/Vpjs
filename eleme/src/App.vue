@@ -1,12 +1,18 @@
 <template>
   <div id="app">
-    <router-view/>
+     <v-eleme></v-eleme>
   </div>
 </template>
 
 <script>
+
+import eleme from '@/components/eleme'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    'v-eleme': eleme
+  }
 }
 </script>
 

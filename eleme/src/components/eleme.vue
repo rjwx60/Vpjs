@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-header></v-header>
+    <v-header :seller="seller"></v-header>
     <div class="tab border-1px">
       <div class="tab-item">
         <router-link to="/goods">商品</router-link>
@@ -20,37 +20,57 @@
 
 import header from '@/components/header/header'
 
+const ERR_OK = 0;
+
 export default {
   name: 'eleme',
   components: {
     'v-header': header
-  }
+  },
+  data() {
+    return {
+      seller: {}
+    }
+  },
+  // 生命周期钩子1
+  mounted() {
+
+  },
+  // 生命周期钩子2
+  created() {
+    this.$axios.get('/api/seller').then((res) => {
+      res = res.data;
+      if(res.errno ===  ERR_OK){
+        this.seller = res.data;
+      }
+    }, (err) => {
+      console.log('seller data get error');
+    })
+  },
+  // 方法集合
+  methods: {
+
+  },
 }
 </script>
 
-<style lang="scss" type="text/css">
+<style lang="stylus" rel="stylesheet/stylus">
 
-  @import '../assets/scss/mixin';
+  @import "../assets/stylus/mixin.styl"
 
-  #app{
-    .tab{
-      display: flex;
-      width: 100%;
-      height: 40px;
-      line-height: 40px;
-      @include border-1px(rgba(7, 17, 27, 0.1));
-      .tab-item{
-        flex: 1;
-        a{
-          display: block;
-          text-align: center;
-          font-size: 14px;
-          color: rgb(77, 85, 93);
-        }
-        .active{
-          color: rgb(240, 20, 20);
-        }
-      }
-    }
-  }
+  .tab
+    display: flex
+    width: 100%
+    height: 40px
+    line-height: 40px
+    border-1px(rgba(7, 17, 27, 0.1))
+    .tab-item
+      flex: 1
+      text-align: center
+      & > a
+        display: block
+        font-size: 14px
+        color: rgb(77, 85, 93)
+        &.active
+          color: rgb(240, 20, 20)
 </style>

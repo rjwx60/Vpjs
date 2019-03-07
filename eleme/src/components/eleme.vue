@@ -12,12 +12,12 @@
         <router-link to="/seller">商家</router-link>
       </div>
     </div>
-  <router-view/>
+    <router-view :seller="seller" keep-alive></router-view>
   </div>
 </template>
 
 <script>
-
+import {urlParse} from '@/assets/js/util';
 import header from '@/components/header/header'
 
 const ERR_OK = 0;
@@ -29,19 +29,21 @@ export default {
   },
   data() {
     return {
-      seller: {}
+      seller: {
+          id: (() => {
+            let queryParam = urlParse();
+            return queryParam.id;
+          })()
+        }
     }
-  },
-  // 生命周期钩子1
-  mounted() {
-
   },
   // 生命周期钩子2
   created() {
     this.$axios.get('/api/seller').then((res) => {
       res = res.data;
       if(res.errno ===  ERR_OK){
-        this.seller = res.data;
+        this.seller = Object.assign({}, this.seller, res.data);
+
       }
     }, (err) => {
       console.log('seller data get error');

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "better-scroll": "^1.14.1",
     "scss": "^0.2.4",
     "scss-loader": "0.0.1",
     "vue": "^2.5.2",

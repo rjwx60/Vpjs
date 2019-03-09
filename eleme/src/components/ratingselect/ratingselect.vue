@@ -23,7 +23,13 @@
   export default {
     data(){
         return {
-          selectType: this.selectType
+          selectType: ALL,
+          onlyContent: false,
+          desc: {
+            all: '全部',
+            positive: '满意',
+            negative: '不满意'
+          }
       }
     },
     props: {
@@ -38,20 +44,18 @@
       //   type: Number,
       //   default: ALL
       // },
-      onlyContent: {
-        type: Boolean,
-        default: false
-      },
-      desc: {
-        type: Object,
-        default() {
-          return {
-            all: '全部',
-            positive: '满意',
-            negative: '不满意'
-          };
-        }
-      }
+      // onlyContent: {
+      //   type: Boolean,
+      //   default: false
+      // },
+      // desc: {
+      //   type: Object,
+      //   default: {
+      //     all: '全部',
+      //     positive: '满意',
+      //     negative: '不满意'
+      //   }
+      // }
     },
     computed: {
       positives() {
@@ -71,14 +75,14 @@
           return;
         }
         this.selectType = type;
-        this.$on('ratingtype.select', type);
+        this.$emit('ratingtypeSelect', type);
       },
       toggleContent(event) {
         if (!event._constructed) {
           return;
         }
         this.onlyContent = !this.onlyContent;
-        this.$on('content.toggle', this.onlyContent);
+        this.$emit('contentToggle', this.onlyContent);
       }
     }
   };

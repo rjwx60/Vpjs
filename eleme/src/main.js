@@ -9,7 +9,7 @@ import router from './router'
 import axios from 'axios'
 
 // import '@/assets/scss/index.scss'
-import './assets/stylus/index.styl'
+import '@/assets/stylus/index.styl'
 
 // 旧用
 // Vue.use(VueResource)

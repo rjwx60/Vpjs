@@ -1,9 +1,10 @@
 <template>
   <div>
     <div class="goods">
+      <!-- 左侧列表 -->
       <div class="menu-wrapper" ref="menuWrapper">
         <ul>
-          <li v-for="(item, index) in goods"  :key="index" class="menu-item" :class="{'current':currentIndex===index}"
+          <li v-for="(item, index) in goods" :key="index" class="menu-item" :class="{'current':currentIndex===index}"
               @click="selectMenu(index,$event)">
             <span class="text border-1px">
               <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>{{item.name}}
@@ -11,6 +12,7 @@
           </li>
         </ul>
       </div>
+      <!-- 右侧 -->
       <div class="foods-wrapper" ref="foodsWrapper">
         <ul>
           <li v-for="(item, index) in goods" :key="index" class="food-list food-list-hook">
@@ -31,6 +33,7 @@
                     <span class="old" v-show="food.oldPrice">￥{{food.oldPrice}}</span>
                   </div>
                   <div class="cartcontrol-wrapper">
+                    <!-- 加减组件 -->
                     <cartcontrol :food="food"></cartcontrol>
                   </div>
                 </div>
@@ -39,9 +42,13 @@
           </li>
         </ul>
       </div>
-      <shopcart ref="shopcart" :select-foods="selectFoods" :delivery-price="seller.deliveryPrice"
+      <!-- 购物车组件 -->
+      <shopcart ref="shopcart"
+                :select-foods="selectFoods"
+                :delivery-price="seller.deliveryPrice"
                 :min-price="seller.minPrice"></shopcart>
     </div>
+    <!-- 食物详情组件 -->
     <food :food="selectedFood" ref="food"></food>
   </div>
 </template>
@@ -69,6 +76,7 @@
         selectedFood: {}
       };
     },
+    // 计算属性,可理解为触发吧
     computed: {
       currentIndex() {
         for (let i = 0; i < this.listHeight.length; i++) {
@@ -112,8 +120,10 @@
         if (!event._constructed) {
           return;
         }
+        // 获取右侧列表对象
         let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
         let el = foodList[index];
+        // 滑动
         this.foodsScroll.scrollToElement(el, 300);
       },
       selectFood(food, event) {
@@ -129,20 +139,23 @@
           this.$refs.shopcart.drop(target);
         });
       },
+      // 初始化滑动组件
       _initScroll() {
+        // 菜单栏
         this.meunScroll = new BScroll(this.$refs.menuWrapper, {
           click: true
         });
-
+        // 食物栏
         this.foodsScroll = new BScroll(this.$refs.foodsWrapper, {
           click: true,
           probeType: 3
         });
-
+        // 监听滑动事件，获取 pos 值
         this.foodsScroll.on('scroll', (pos) => {
           this.scrollY = Math.abs(Math.round(pos.y));
         });
       },
+      // 计算 foodList 高度
       _calculateHeight() {
         let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
         let height = 0;

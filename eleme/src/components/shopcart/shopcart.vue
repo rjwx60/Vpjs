@@ -19,31 +19,35 @@
         </div>
       </div>
       <div class="ball-container">
-        <div transition="drop" v-for="(ball, index) in balls" :key="index" v-show="ball.show" class="ball">
-          <div class="inner inner-hook"></div>
-        </div>
+        <transition-group name="drop">
+          <div v-for="(ball, index) in balls" :key="index+0" v-show="ball.show" class="ball">
+            <div class="inner inner-hook"></div>
+          </div>
+        </transition-group>
       </div>
-      <div class="shopcart-list" v-show="listShow" transition="fold">
-        <div class="list-header">
-          <h1 class="title">购物车</h1>
-          <span class="empty" @click="empty">清空</span>
+        <div class="shopcart-list" v-show="listShow">
+          <div class="list-header">
+            <h1 class="title">购物车</h1>
+            <span class="empty" @click="empty">清空</span>
+          </div>
+          <div class="list-content" ref="listContent">
+            <transition-group name="fold" tag="ul">
+              <li class="food" v-for="(food, index) in selectFoods" :key="index + 0">
+                <span class="name">{{food.name}}</span>
+                <div class="price">
+                  <span>￥{{food.price*food.count}}</span>
+                </div>
+                <div class="cartcontrol-wrapper">
+                  <cartcontrol :food="food"></cartcontrol>
+                </div>
+              </li>
+            </transition-group>
+          </div>
         </div>
-        <div class="list-content" ref="listContent">
-          <ul>
-            <li class="food" v-for="(food, index) in selectFoods" :key="index">
-              <span class="name">{{food.name}}</span>
-              <div class="price">
-                <span>￥{{food.price*food.count}}</span>
-              </div>
-              <div class="cartcontrol-wrapper">
-                <cartcontrol :food="food"></cartcontrol>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
-    <div class="list-mask" @click="hideList" v-show="listShow" transition="fade"></div>
+    <transition name="fade">
+      <div class="list-mask" @click="hideList" v-show="listShow"></div>
+    </transition>
   </div>
 </template>
 
@@ -322,7 +326,7 @@
         left: 32px
         bottom: 22px
         z-index: 200
-        &.drop-transition
+        &.drop-enter-active, &.drop-leave-active
           transition: all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41)
           .inner
             width: 16px
@@ -336,10 +340,10 @@
       top: 0
       z-index: -1
       width: 100%
-      &.fold-transition
+      &.fold-enter-active, &.fold-leave-active
         transition: all 0.5s
         transform: translate3d(0, -100%, 0)
-      &.fold-enter, &.fold-leave
+      &.fold-enter, &.fold-leave-to
         transform: translate3d(0, 0, 0)
       .list-header
         height: 40px
@@ -391,11 +395,11 @@
     height: 100%
     z-index: 40
     backdrop-filter: blur(10px)
-    &.fade-transition
+    &.fade-enter-active. &.fade-leave-active
       transition: all 0.5s
       opacity: 1
       background: rgba(7, 17, 27, 0.6)
-    &.fade-enter, &.fade-leave
+    &.fade-enter, &.fade-leave-to
       opacity: 0
       background: rgba(7, 17, 27, 0)
 </style>

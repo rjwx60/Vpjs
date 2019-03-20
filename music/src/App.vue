@@ -1,15 +1,28 @@
 <template>
   <div id="app">
-    <router-view/>
+    <Header></Header>
+    <Tab></Tab>
+    <keep-alive>
+      <router-view/>
+    </keep-alive>
   </div>
 </template>
 
 <script>
+
+import Header from '@/components/header/Header'
+import Tab from '@/components/tab/tab'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components:{
+    Header,
+    Tab
+  },
 }
 </script>
 
-<style>
-
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
 </style>
+

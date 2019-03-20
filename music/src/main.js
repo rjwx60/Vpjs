@@ -4,6 +4,14 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+// 图片懒加载
+import VueLazyLoad from 'vue-lazyload';
+
+Vue.use(VueLazyLoad, {
+  loading: require('@/assets/image/default.png')
+})
+
+
 Vue.config.productionTip = false
 
 import '@/assets/stylus/index.styl';

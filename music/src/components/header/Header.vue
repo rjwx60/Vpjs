@@ -13,8 +13,8 @@
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-  @import '../../assets/stylus/variable.styl'
-  @import '../../assets/stylus/mixin.styl'
+  @import '../../assets/stylus/variable'
+  @import '../../assets/stylus/mixin'
 
   .header
     position: relative

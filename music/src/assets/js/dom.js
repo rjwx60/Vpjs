@@ -1,4 +1,5 @@
 export function hasClass(el, className) {
+  // 空白字符或起始末尾符号
   let reg = new RegExp('(^|\\s)' + className + '(\\s|$)')
   return reg.test(el.className)
 }

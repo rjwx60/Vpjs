@@ -1,17 +1,19 @@
 <template>
   <div class="singer" ref="singer">
+    <!-- 将处理好的结果 singers 传递给组件 list-view -->
+    <!-- @selected 自定义事件，组件内实现-->
     <list-view @select="selectSinger" :data="singers" ref="list"></list-view>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import ListView from '@/base/listview/listview'
-  import {getSingerList} from '@/api/singer'
-  import {ERR_OK} from '@/api/config'
   import Singer from '@/assets/js/singer'
-  import {mapMutations} from 'vuex'
-  import {playlistMixin} from '@/assets/js/mixin'
+  import ListView from '@/base/listview/listview'
+  import { ERR_OK } from '@/api/config'
+  import { mapMutations } from 'vuex'
+  import { getSingerList } from '@/api/singer'
+  import { playlistMixin } from '@/assets/js/mixin'
 
   const HOT_SINGER_LEN = 10
   const HOT_NAME = '热门'
@@ -27,17 +29,6 @@
       this._getSingerList()
     },
     methods: {
-      handlePlaylist(playlist) {
-        const bottom = playlist.length > 0 ? '60px' : ''
-        this.$refs.singer.style.bottom = bottom
-        this.$refs.list.refresh()
-      },
-      selectSinger(singer) {
-        this.$router.push({
-          path: `/singer/${singer.id}`
-        })
-        this.setSinger(singer)
-      },
       // 获取歌手列表
       _getSingerList() {
         getSingerList().then((res) => {
@@ -46,7 +37,7 @@
           }
         })
       },
-      // 处理数据，先聚合后分类排序
+      // 获取歌手列表 - 数据处理, 先聚合后分类排序
       _normalizeSinger(list) {
         // 聚合处理
         let map = {
@@ -88,12 +79,27 @@
         ret.sort((a, b) => {
           return a.title.charCodeAt(0) - b.title.charCodeAt(0)
         })
-        console.log(hot.concat(ret))
+        // console.log(hot.concat(ret))
+        // 最后得到一个分别跟字母对应的数组列表
         return hot.concat(ret)
+      },
+      // 路由跳转
+      selectSinger(singer) {
+        this.$router.push({
+          path: `/singer/${singer.id}`
+        })
+        // Vuex 状态传递
+        this.setSinger(singer)
       },
       ...mapMutations({
         setSinger: 'SET_SINGER'
       })
+      // 无用！
+      // handlePlaylist(playlist) {
+      //   const bottom = playlist.length > 0 ? '60px' : ''
+      //   this.$refs.singer.style.bottom = bottom
+      //   this.$refs.list.refresh()
+      // },
     },
     components: {
       ListView

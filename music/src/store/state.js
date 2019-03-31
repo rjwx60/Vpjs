@@ -1,5 +1,5 @@
-import {playMode} from '@/assets/js/config'
-import {loadSearch, loadPlay, loadFavorite} from '@/assets/js/cache'
+import { playMode } from '@/assets/js/config'
+import { loadSearch, loadPlay, loadFavorite } from '@/assets/js/cache'
 
 const state = {
   singer: {},

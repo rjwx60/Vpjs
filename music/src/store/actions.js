@@ -1,7 +1,7 @@
 import * as types from './mutation-types'
-import {playMode} from '@/assets/js/config'
-import {shuffle} from '@/assets/js/util'
-import {saveSearch, clearSearch, deleteSearch, savePlay, saveFavorite, deleteFavorite} from '@/assets/js/cache'
+import { playMode } from '@/assets/js/config'
+import { shuffle } from '@/assets/js/util'
+import { saveSearch, clearSearch, deleteSearch, savePlay, saveFavorite, deleteFavorite} from '@/assets/js/cache'
 
 function findIndex(list, song) {
   return list.findIndex((item) => {

@@ -93,13 +93,13 @@
       },
       ...mapMutations({
         setSinger: 'SET_SINGER'
-      })
-      // 无用！
-      // handlePlaylist(playlist) {
-      //   const bottom = playlist.length > 0 ? '60px' : ''
-      //   this.$refs.singer.style.bottom = bottom
-      //   this.$refs.list.refresh()
-      // },
+      }),
+      // Vuex
+      handlePlaylist(playlist) {
+        const bottom = playlist.length > 0 ? '60px' : ''
+        this.$refs.singer.style.bottom = bottom
+        this.$refs.list.refresh()
+      },
     },
     components: {
       ListView

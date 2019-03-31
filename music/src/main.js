@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 
 // 图片懒加载
 import VueLazyLoad from 'vue-lazyload';
@@ -20,6 +21,7 @@ import '@/assets/stylus/index.styl';
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

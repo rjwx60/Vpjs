@@ -5,6 +5,7 @@
     <keep-alive>
       <router-view/>
     </keep-alive>
+    <player></player>
   </div>
 </template>
 
@@ -12,12 +13,14 @@
 
 import Header from '@/components/header/Header'
 import Tab from '@/components/tab/tab'
+import Player from '@/components/player/player'
 
 export default {
   name: 'App',
   components:{
     Header,
-    Tab
+    Tab,
+    Player
   },
 }
 </script>

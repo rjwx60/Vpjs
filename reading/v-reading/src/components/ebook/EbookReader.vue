@@ -14,10 +14,14 @@ global.ePub = Epub
 
 export default {
   computed: {
-    ...mapGetters(['fileName'])
+    ...mapGetters([
+      'fileName',
+      'menuVisible',
+    ])
   },
   mounted() {
     const fileName = this.$route.params.fileName.split('|').join('/');
+    console.log('fileName: ', fileName);
     this.$store.dispatch('setFileName', fileName).then(() => {
       this.initEpub();
     })
@@ -57,12 +61,26 @@ export default {
       this.rendition && this.rendition.next();
     },
     toggleTitleAndMenu() {
+      this.$store.dispatch('setMenuVisible', !this.menuVisible)
     }
   },
 }
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-  @import '../../assets/styles/global';
+  @import "../../assets/styles/global";
 
+  .ebook-reader {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    .ebook-reader-mask {
+      position: absolute;
+      z-index: 150;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
 </style>

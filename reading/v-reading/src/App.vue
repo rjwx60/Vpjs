@@ -1,31 +1,38 @@
 <template>
   <div id="app">
-    <span>abcdefg</span>
     <router-view/>
   </div>
 </template>
 
 <script>
-export default {
-  mounted () {
-    console.log(this.$store.state.book.test)
-    this.$store.dispatch('setTEST', 10).then(() => {
-      console.log(this.$store.state.book.test)
-    })
-  }
-}
+// 引入 rem 并限制大小
 document.addEventListener('DOMContentLoaded', () => {
   const html = document.querySelector('html')
   let fontSize = window.innerWidth / 10
   fontSize = fontSize > 50 ? 50 : fontSize
   html.style.fontSize = fontSize + 'px'
 })
+
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters(['test'])
+  },
+  mounted () {
+    console.log('this.book: ', this.book);
+    this.$store.dispatch('setTEST', 10).then(() => {
+      console.log(this.$store.state.book.test)
+    })
+  }
+}
 </script>
 
-<style>
+<style lang="scss" rel="stylesheet" scoped>
   @import './assets/styles/global.scss';
-
-  span{
-    font-family: 'Days One'
+  #app{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
   }
 </style>

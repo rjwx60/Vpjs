@@ -17,7 +17,6 @@ export default {
     ...mapGetters(['fileName'])
   },
   mounted() {
-    // const baseUrl = "http://172.20.10.8:8081/epub/";
     const fileName = this.$route.params.fileName.split('|').join('/');
     this.$store.dispatch('setFileName', fileName).then(() => {
       this.initEpub();
@@ -33,6 +32,31 @@ export default {
         method: 'default'
       })
       this.rendition.display();
+      // 手势翻页
+      this.rendition.on('touchstart', event => {
+        this.touchStartX = event.changedTouches[0].clientX;
+        this.touchStartTime = event.timeStamp;
+      })
+      this.rendition.on('touchend', event => {
+        const offsetX = event.changedTouches[0].clientX - this.touchStartX;
+        const time = event.timeStamp - this.touchStartTime;
+        if (time < 500 && offsetX > 40) {
+          this.prevPage();
+        } else if (time < 500 && offsetX < -40) {
+          this.nextPage();
+        } else {
+          this.toggleTitleAndMenu();
+        }
+        event.stopPropagation();
+      })
+    },
+    prevPage() {
+      this.rendition && this.rendition.prev();
+    },
+    nextPage() {
+      this.rendition && this.rendition.next();
+    },
+    toggleTitleAndMenu() {
     }
   },
 }

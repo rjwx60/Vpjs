@@ -1,12 +1,17 @@
 <template>
-  <div class="check">
-    aaa
+  <div class="ebook">
+    <ebook-reader></ebook-reader>
   </div>
 </template>
 
 <script>
-export default {
+// 引入组件
+import EbookReader from '../../components/ebook/EbookReader'
 
+export default {
+  components: {
+    EbookReader
+  }
 }
 </script>
 

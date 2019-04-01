@@ -12,27 +12,22 @@ document.addEventListener('DOMContentLoaded', () => {
   fontSize = fontSize > 50 ? 50 : fontSize
   html.style.fontSize = fontSize + 'px'
 })
-
-import { mapGetters } from 'vuex'
-
-export default {
-  computed: {
-    ...mapGetters(['test'])
-  },
-  mounted () {
-    console.log('this.book: ', this.book);
-    this.$store.dispatch('setTEST', 10).then(() => {
-      console.log(this.$store.state.book.test)
-    })
-  }
-}
+export default {}
 </script>
 
-<style lang="scss" rel="stylesheet" scoped>
+<style scoped>
   @import './assets/styles/global.scss';
+
   #app{
-    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
     width: 100%;
+    height: 100%;
+    background: #7d8188;
     overflow: hidden;
   }
 </style>

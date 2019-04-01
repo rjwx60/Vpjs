@@ -4,8 +4,8 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
+  // mode: 'history',
+  // base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
@@ -13,7 +13,13 @@ export default new Router({
     },
     {
       path: '/ebook',
-      component: () => import('./views/ebook/index.vue')
+      component: () => import('./views/ebook/index.vue'),
+      children: [
+        {
+          path: ':fileName',
+          component: () => import('./components/ebook/EbookReader.vue')
+        }
+      ]
     }
   ]
 })

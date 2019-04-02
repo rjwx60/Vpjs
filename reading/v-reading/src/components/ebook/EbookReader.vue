@@ -7,28 +7,26 @@
 
 <script>
 
-import { mapGetters } from 'vuex'
+import { ebookMixin } from '../../utils/mixin';
+import { mapActions } from 'vuex';
 import Epub from 'epubjs'
 
 global.ePub = Epub
 
 export default {
-  computed: {
-    ...mapGetters([
-      'fileName',
-      'menuVisible',
-    ])
-  },
+  mixins: [ebookMixin],
   mounted() {
-    const fileName = this.$route.params.fileName.split('|').join('/');
-    console.log('fileName: ', fileName);
+    // 自定义连接符为 -
+    const fileName = this.$route.params.fileName.split('-').join('/');
     this.$store.dispatch('setFileName', fileName).then(() => {
       this.initEpub();
     })
   },
   methods: {
+    ...mapActions(['setMenuVisible']),
     initEpub(){
-      const url = "http://172.20.10.8:8081/epub/" + this.fileName + '.epub';
+      const url = "http://192.168.31.97:8081/epub/" + this.fileName + '.epub';
+      console.log('url: ', url);
       this.book = new Epub(url);
       this.rendition = this.book.renderTo('read', {
         width: innerWidth,
@@ -56,12 +54,21 @@ export default {
     },
     prevPage() {
       this.rendition && this.rendition.prev();
+      // 翻页后位置还原
+      this.hideTitleAndMenu();
     },
     nextPage() {
       this.rendition && this.rendition.next();
+      // 翻页后位置还原
+      this.hideTitleAndMenu();
     },
     toggleTitleAndMenu() {
-      this.$store.dispatch('setMenuVisible', !this.menuVisible)
+      // this.$store.dispatch('setMenuVisible', !this.menuVisible)
+      this.setMenuVisible(!this.menuVisible);
+    },
+    hideTitleAndMenu() {
+      // this.$store.dispatch('setMenuVisible', false)
+      this.setMenuVisible(false);
     }
   },
 }

@@ -1,16 +1,23 @@
 // Mixin - states - actions
 import { mapGetters, mapActions } from 'vuex';
 
-export const  ebookMixin = {
+export const ebookMixin = {
   computed: {
     ...mapGetters([
       'fileName',
-      'menuVisible'
+      'menuVisible',
+      'currentBook',
+      'settingVisible',
+      'defaultFontSize'
     ])
   },
-  method: {
+  methods: {
     ...mapActions([
-      'setMenuVisible'
+      'setFileName',
+      'setMenuVisible',
+      'setCurrentBook',
+      'setSettingVisible',
+      'setDefaultFontSize'
     ])
   }
 }

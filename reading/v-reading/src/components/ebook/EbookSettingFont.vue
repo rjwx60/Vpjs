@@ -1,21 +1,26 @@
 <template>
   <transition name="slide-up">
-    <div class="setting-wrapper" v-show="menuVisible && settingVisible === 0">
+    <div  class="setting-wrapper"
+          v-show="menuVisible && settingVisible === 0">
       <div class="setting-font-size">
-        <div class="preview" :style="{fontSize: fontSizeList[0].fontSize + 'px'}">A</div>
+        <div  class="preview"
+              :style="{fontSize: fontSizeList[0].fontSize + 'px'}">A</div>
         <div class="select">
-          <div class="select-wrapper" v-for="(item, index) in fontSizeList" :key="index"
-               @click="setFontSize(item.fontSize)">
+          <div  class="select-wrapper"
+                v-for="(item, index) in fontSizeList" :key="index"
+                @click="setFontSize(item.fontSize)">
             <div class="line"></div>
             <div class="point-wrapper">
-              <div class="point" v-show="defaultFontSize === item.fontSize">
+              <div  class="point"
+                    v-show="defaultFontSize === item.fontSize">
                 <div class="small-point"></div>
               </div>
             </div>
             <div class="line"></div>
           </div>
         </div>
-        <div class="preview" :style="{fontSize: fontSizeList[fontSizeList.length - 1].fontSize + 'px'}">A</div>
+        <div  class="preview"
+              :style="{fontSize: fontSizeList[fontSizeList.length - 1].fontSize + 'px'}">A</div>
       </div>
     </div>
   </transition>

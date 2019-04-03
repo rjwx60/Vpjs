@@ -63,6 +63,7 @@ export default {
     },
     toggleTitleAndMenu() {
       if(this.menuVisible){
+        // 点击时隐藏子菜单栏
         this.setSettingVisible(-1);
       }
       // this.$store.dispatch('setMenuVisible', !this.menuVisible)
@@ -70,6 +71,7 @@ export default {
     },
     hideTitleAndMenu() {
       if(this.menuVisible){
+        // 点击时隐藏子菜单栏
         this.setSettingVisible(-1);
       }
       // this.$store.dispatch('setMenuVisible', false)

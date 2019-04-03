@@ -2,6 +2,7 @@
   <transition name="slide-up">
     <div  class="setting-wrapper"
           v-show="menuVisible && settingVisible === 0">
+      <!-- 设置字体大小 -->
       <div class="setting-font-size">
         <div  class="preview"
               :style="{fontSize: fontSizeList[0].fontSize + 'px'}">A</div>
@@ -22,6 +23,15 @@
         <div  class="preview"
               :style="{fontSize: fontSizeList[fontSizeList.length - 1].fontSize + 'px'}">A</div>
       </div>
+      <!-- 设置字体样式 -->
+      <div class="setting-font-family" @click="showFontFamilyPopup">
+        <div class="setting-font-family-text-wrapper">
+          <span class="setting-font-family-text">{{defaultFontFamily}}</span>
+        </div>
+        <div class="setting-font-family-icon-wrapper">
+          <span class="icon-forward"></span>
+        </div>
+      </div>
     </div>
   </transition>
 </template>
@@ -34,13 +44,16 @@ export default {
   mixins: [ebookMixin],
   data() {
     return {
-      fontSizeList: FONT_SIZE_LIST
+      fontSizeList: FONT_SIZE_LIST,
     }
   },
   methods: {
     setFontSize(fontSize) {
       this.setDefaultFontSize(fontSize);
       this.currentBook.rendition.themes.fontSize(fontSize);
+    },
+    showFontFamilyPopup() {
+      this.setFontFamilyVisible(true)
     }
   },
 

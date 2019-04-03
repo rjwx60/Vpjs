@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     initEpub(){
-      const url = "http://192.168.31.97:8081/epub/" + this.fileName + '.epub';
+      const url = `${process.env.VUE_APP_RES_URL}/epub/${this.fileName}.epub`;
       this.book = new Epub(url);
       this.setCurrentBook(this.book);
       this.rendition = this.book.renderTo('read', {
@@ -50,6 +50,13 @@ export default {
         }
         event.stopPropagation();
       })
+      // 添加字体
+      this.rendition.hooks.content.register(contents => {
+        contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/fonts/daysOne.css`);
+        contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/fonts/cabin.css`);
+        contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/fonts/montserrat.css`);
+        contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/fonts/tangerine.css`);
+      })
     },
     prevPage() {
       this.rendition && this.rendition.prev();
@@ -65,15 +72,15 @@ export default {
       if(this.menuVisible){
         // 点击时隐藏子菜单栏
         this.setSettingVisible(-1);
+        this.setFontFamilyVisible(false);
       }
       // this.$store.dispatch('setMenuVisible', !this.menuVisible)
       this.setMenuVisible(!this.menuVisible);
     },
     hideTitleAndMenu() {
-      if(this.menuVisible){
-        // 点击时隐藏子菜单栏
-        this.setSettingVisible(-1);
-      }
+      // 点击时隐藏子菜单栏
+      this.setSettingVisible(-1);
+      this.setFontFamilyVisible(false);
       // this.$store.dispatch('setMenuVisible', false)
       this.setMenuVisible(false);
     }

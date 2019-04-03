@@ -16,13 +16,18 @@
         </div>
       </div>
     </transition>
+    <!-- 选择字号 -->
     <ebook-setting-font></ebook-setting-font>
+    <!-- 选择字体 -->
+    <ebook-setting-font-popup></ebook-setting-font-popup>
   </div>
 </template>
 
 <script>
-import { ebookMixin } from '../../utils/mixin'
 import EbookSettingFont from '../ebook/EbookSettingFont'
+import EbookSettingFontPopup from '../ebook/EbookSettingFontPopup'
+import { ebookMixin } from '../../utils/mixin'
+
 export default {
   mixins: [ebookMixin],
   methods: {
@@ -31,7 +36,8 @@ export default {
     }
   },
   components: {
-    EbookSettingFont
+    EbookSettingFont,
+    EbookSettingFontPopup
   }
 }
 </script>

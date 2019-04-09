@@ -1,0 +1,56 @@
+<html>
+
+<head>
+  <style>
+    .item {
+      color: orange;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 插值表达式 -->
+    <span>{{msg}}</span>
+    <div>
+      <!-- 双向绑定 -->
+      <input type="text" v-model="info">
+      <!-- 事件与修饰符 -->
+      <button @click.stop.prevent="handleClick">添加</button>
+    </div>
+    <ul>
+      <!-- 父传值子组件 -->
+      <todo-item v-for="item in list" :item="item"></todo-item>
+    </ul>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script>
+    // 自构建组件
+    Vue.component('todo-item', {
+      // 子组件接收
+      props: ['item'],
+      template: '<li class="item">{{item}}</li>'
+    })
+    var app = new Vue({
+      // 挂载点
+      el: '#app',
+      // 静态属性
+      data() {
+        return {
+          msg: 'Hello Guys',
+          info: '',
+          list: []
+        }
+      },
+      // 静态方法
+      methods: {
+        handleClick() {
+          this.list.push(this.info);
+          this.info = '';
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

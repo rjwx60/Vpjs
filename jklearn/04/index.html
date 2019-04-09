@@ -19,18 +19,21 @@
       <button @click.stop.prevent="handleClick">添加</button>
     </div>
     <ul>
-      <!-- 父传值子组件 -->
-      <todo-item v-for="item in list" :item="item"></todo-item>
+      <!-- 父传值子组件 :items 注意:传递时可驼峰，但获取时须转为小写 -->
+      <todo-item v-for="fitem in list" :itemS="fitem"></todo-item>
     </ul>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script>
-    // 自构建组件
+    // 构建子组件
     Vue.component('todo-item', {
       // 子组件接收
-      props: ['item'],
-      template: '<li class="item">{{item}}</li>'
+      // 注意: 不能大写, 否则作为属性值添加而非文本内容
+      props: ['items'],
+      template: '<li class="item">{{items}}</li>'
     })
+
+    // 构建父组件
     var app = new Vue({
       // 挂载点
       el: '#app',

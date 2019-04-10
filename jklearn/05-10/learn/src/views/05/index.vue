@@ -1,9 +1,5 @@
 <template>
-  <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-
-    <!-- 05 Test -->
+  <div>
     <input type="text" v-model="inputInfo">
     <button @click.prevent="addTodoItem">Add todoItem</button>
     <test-item v-for="item in todoList" :key="item">
@@ -16,10 +12,8 @@
 </template>
 
 <script>
-import TestItem from './components/TestItem.vue'
-
+import TestItem from './TestItem'
 export default {
-  name: 'app',
   components: {
     TestItem
   },
@@ -38,5 +32,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="">
+  
 </style>

@@ -14,5 +14,20 @@ export default new Router({
       name: '第一个',
       component: () => import('./views/05')
     },
+    {
+      path: '/06',
+      name: 'vue组件核心3概念',
+      component: () => import('./views/06')
+    },
+    {
+      path: '/09',
+      name: '双向绑定和单向数据流',
+      component: () => import('./views/09/')
+    },
+    {
+      path: '/10',
+      name: '虚拟DOM和key属性',
+      component: () => import('./views/10')
+    }
   ]
 })

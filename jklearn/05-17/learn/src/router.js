@@ -43,6 +43,11 @@ export default new Router({
       path: '/13',
       name: 'life circle & function component',
       component: () => import('./views/13')
+    },
+    {
+      path: '/14',
+      name: 'inside directive',
+      component: () => import('./views/14')
     }
   ]
 })

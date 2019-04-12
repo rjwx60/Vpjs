@@ -33,6 +33,11 @@ export default new Router({
       path: '/11',
       name: '触发组件更新',
       component: () => import('./views/11')
+    },
+    {
+      path: '/12',
+      name: 'computer & watcher',
+      component: () => import('./views/12')
     }
   ]
 })

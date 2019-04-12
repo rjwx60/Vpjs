@@ -46,8 +46,24 @@ export default new Router({
     },
     {
       path: '/14',
-      name: 'inside directive',
+      name: 'directive',
       component: () => import('./views/14')
-    }
+    },
+    {
+      path: '/15',
+      name: 'provide & inject',
+      component: () => import('./views/15')
+    },
+    {
+      path: '/16',
+      name: '跨层级获取实例',
+      component: () => import('./views/16')
+    },
+    {
+      path: '/17',
+      name: 'template & jsx',
+      component: () => import('./views/17')
+    },
+    
   ]
 })

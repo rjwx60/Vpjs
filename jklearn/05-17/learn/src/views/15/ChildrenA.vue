@@ -17,6 +17,7 @@ export default {
     ChildrenC,
     ChildrenD
   },
+  // 提供数据
   provide() {
     return {
       theme: {
@@ -26,6 +27,7 @@ export default {
   },
   // provide() {
   //   return {
+  //     // 返回整个实例包含太多内容，不便于维护
   //     theme: this
   //   };
   // },

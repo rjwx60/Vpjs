@@ -28,6 +28,11 @@ export default new Router({
       path: '/10',
       name: '虚拟DOM和key属性',
       component: () => import('./views/10')
+    },
+    {
+      path: '/11',
+      name: '触发组件更新',
+      component: () => import('./views/11')
     }
   ]
 })

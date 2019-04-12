@@ -38,6 +38,11 @@ export default new Router({
       path: '/12',
       name: 'computer & watcher',
       component: () => import('./views/12')
+    },
+    {
+      path: '/13',
+      name: 'life circle & function component',
+      component: () => import('./views/13')
     }
   ]
 })

@@ -17,9 +17,11 @@ export default {
     ChildrenC,
     ChildrenD
   },
+  // 提供数据
   provide() {
     return {
       setChildrenRef: (name, ref) => {
+        // name 接收的是组件的 name，通过
         this[name] = ref;
       },
       getChildrenRef: name => {
